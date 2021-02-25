@@ -1,0 +1,15 @@
+version: '3'
+services:
+  searchapi:
+    restart: unless-stopped
+    build: searchapi/.
+    ports:
+      - "8081:3000"
+  react:
+    restart: unless-stopped
+    build: 
+      context: react/.
+      args:
+        - SEARCH=http://10.10.4.15:8081/api
+    ports:
+      - "8080:80"
